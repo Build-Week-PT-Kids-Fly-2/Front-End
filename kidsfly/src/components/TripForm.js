@@ -1,9 +1,7 @@
 import React, { useState, useEffect} from 'react';
-import axios from 'axios';
-import { withFormik, Form, Field } from 'formik';
-import * as yup from 'yup'; yarb
 
-const TravelerForm = props => {
+
+const TripForm = props => {
     const [form, setForm] = useState({
         Airport: "",
         Airline: "",
@@ -22,7 +20,7 @@ var dateTime = date+' '+time;
 
 
 const handleChanges = event => {
-   setForm({...form, [event.target.name]: event.target.value});
+   setForm({...form, [event.target.name]: event.target.value}); 
 }
 
 const submitForm = event => {
@@ -37,7 +35,7 @@ const submitForm = event => {
         Number_Of_Children: "",
         Needs: ""
 })
-}
+
 
 return (
     <form className='form' onSubmit={submitForm}>
@@ -105,7 +103,8 @@ return (
                     value={form.Needs}
                     onChange={handleChanges}
             />
+            <button type="submit">Add Trip</button>
    </form>
 )
-
-export default TravelerForm;
+}
+export default TripForm;
