@@ -35,7 +35,7 @@ class Login extends React.Component {
                     <input
                     type = "text"
                     name = "username"
-                    value = {"this.state.credentials.username"}
+                    value = {this.state.credentials.username}
                     onChange = {this.handleChange}
                     />
 
