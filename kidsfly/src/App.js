@@ -1,17 +1,26 @@
 import React from 'react';
 import './App.css';
-import { Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Login from "./components/Login";
-import UserRegistration from "./components/UserRegistration"
+import UserCard from "./components/UserCard"
 import AdminPage from "./components/AdminPage"
+import UserRegistration from './components/UserRegistration';
+import PrivateRoute from "./components/PrivateRoute"
+import WelcomePage from "./components/WelcomePage"
 
 function App() {
   return (
+    <Router>
     <div className="App">
-      <Route path="/admin_page" component={AdminPage}/>
+      <WelcomePage path="/" component={WelcomePage} />
       <Route path="/user_registration" component={UserRegistration} />
-      <Route path="/login" component={Login} />
-    </div>
+      <Route path="/admin_page" component={AdminPage}/>
+      <Switch>
+          <PrivateRoute exact path="/protected" component={UserCard} />
+          <Route path="/login" component={Login} />
+      </Switch>
+        </div>
+    </Router>
   );
 }
 

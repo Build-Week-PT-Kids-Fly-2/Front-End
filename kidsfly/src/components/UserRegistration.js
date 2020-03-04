@@ -1,5 +1,7 @@
 import React from "react";
 import {axiosWithAuth} from "../utilites/axiosWithAuth";
+import { withRouter } from "react-router-dom";
+
 
 class UserRegistration extends React.Component {
     constructor() {
@@ -27,22 +29,23 @@ class UserRegistration extends React.Component {
         })
     };   
       
-    handleSubmit = e => {
-        e.preventDafault();
-          axiosWithAuth()
-          .post("https://kidsfly1.herokuapp.com/api/auth/register", this.state.user)
-          .then(res => {
-            localStorage.setItem("token", res.data.payload);
-            this.props.history.push("/login");
-          })
-          .catch(err => {
-            console.log("error registering: ", err);
-          });
-        }  
+    addFriend = e => {
+        e.preventDefault();
+        axiosWithAuth()
+        .post('api/users/:id ', this.state.user)
+        .then(res => {
+            console.log('success', res);
+            localStorage.setItem('user', res.data.payload);
+            this.props.history.push('/user_card')
+        })
+        .catch(err => console.log('error', err))
+    };
     render() {          
        return(
          <div>
+             <h1>Registration Page</h1>
              <form onSubmit={this.handleSubmit}>
+                 <div className='form-group'>
                  <label>First Name</label>
                  <input 
                  type = "text"
@@ -51,7 +54,8 @@ class UserRegistration extends React.Component {
                  value = {this.state.first_name}
                  onChange = {this.handleChange}
                  />
-
+                </div>
+                <div className='form-group'>
                  <label>Last Name</label>
                  <input
                  type = "text"
@@ -60,7 +64,18 @@ class UserRegistration extends React.Component {
                  value = {this.state.last_name}
                  onChange = {this.handleChange}
                  />
-
+                </div>
+                <div className='form-group'>
+                    <label>Phone Number</label>
+                    <input
+                    type = "number"
+                    name = "phone"
+                    placeholder = "phone number"
+                    value = {this.state.phone}
+                    onChange = {this.handleChange}
+                    />
+                </div>
+                <div className='form-group'>
                  <label>Address</label>
                  <input
                  type = "text"
@@ -69,7 +84,8 @@ class UserRegistration extends React.Component {
                  value = {this.state.address}
                  onChange = {this.handleChange}
                  />
-
+                </div>
+                <div className='form-group'>
                  <label>Address 2</label>
                  <input 
                  type = "text"
@@ -78,7 +94,8 @@ class UserRegistration extends React.Component {
                  value = {this.state.address_2}
                  onChange = {this.handleChange}
                  />
-
+                </div>
+                <div className='form-group'>
                 <label>Home Airport</label>
                  <input 
                  type = "text"
@@ -87,16 +104,9 @@ class UserRegistration extends React.Component {
                  value = {this.state.home_airport}
                  onChange = {this.handleChange}
                  />
-
-                <label>Phone Number</label>
-                 <input 
-                 type = "number"
-                 name = "phone"
-                 placeholder = "Phone Number"
-                 value = {this.state.phone}
-                 onChange = {this.handleChange}
-                 />
-
+                </div>
+               
+                <div className='form-group'>
                 <label>Username</label>
                  <input 
                  type = "email"
@@ -105,7 +115,8 @@ class UserRegistration extends React.Component {
                  value = {this.state.username}
                  onChange = {this.handleChange}
                  />
-
+                </div>
+                <div className='form-group'>
                 <label>Password</label>
                  <input 
                  type = "text"
@@ -114,7 +125,8 @@ class UserRegistration extends React.Component {
                  value = {this.state.password}
                  onChange = {this.handleChange}
                  />
-                 <button>Submit</button>
+                 </div>
+                 <button type='submit' className='btn'>Submit</button>
              </form>
          </div>
      );
@@ -122,4 +134,4 @@ class UserRegistration extends React.Component {
  }   
 
 
-export default UserRegistration;
+export default withRouter(UserRegistration);

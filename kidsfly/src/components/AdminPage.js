@@ -2,8 +2,8 @@ import React from "react";
 import axiosWithAuth from "../utilites/axiosWithAuth"
 
 class AdminPage extends React.Component{
-    constructor() {
-    super();
+    constructor(props) {
+    super(props);
     this.state = {
         admin: {
     username: "",
@@ -35,6 +35,7 @@ handleSubmit = e => {
     render() {          
         return(
           <div>
+              <h1>Admin Page</h1>
               <form onSubmit={this.handleSubmit}>
                   <label>Username</label>
                   <input 

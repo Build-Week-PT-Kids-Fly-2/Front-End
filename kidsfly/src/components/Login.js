@@ -1,5 +1,6 @@
 import React from "react";
 import axiosWithAuth from "../utilites/axiosWithAuth";
+import { withRouter } from "react-router-dom";
 
 class Login extends React.Component {
     state = {
@@ -31,7 +32,9 @@ class Login extends React.Component {
     render(){
         return(
             <div>
+                <h1>Login Page</h1>
                 <form onSubmit = {this.logn}>
+                    <label>Username</label>
                     <input
                     type = "text"
                     name = "username"
@@ -39,6 +42,7 @@ class Login extends React.Component {
                     onChange = {this.handleChange}
                     />
 
+                    <label>Password</label>
                     <input
                     type = "text"
                     name = "password"
@@ -53,4 +57,4 @@ class Login extends React.Component {
         )
     }
 }
-export default Login;
+export default withRouter(Login);
