@@ -1,6 +1,6 @@
 import React from "react";
 import axiosWithAuth from "../utilites/axiosWithAuth";
-// import { withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 class Login extends React.Component {
     state = {
@@ -57,4 +57,4 @@ class Login extends React.Component {
         )
     }
 }
-export default Login;
+export default withRouter(Login);
