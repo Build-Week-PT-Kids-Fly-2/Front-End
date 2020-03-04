@@ -1,18 +1,15 @@
-import React from 'react';
+import React, { useState, useEffect} from 'react';
 import './App.css';
 import { Route } from 'react-router-dom';
 import Login from "./components/Login";
 import Registration from "./components/Registration"
+import TripForm from './components/TripForm'
+import SubForm from './components/SubForm'
+
 
 function App() {
 
   const [forms, setForms] = useState([
-    {
-      id: 1,
-      title: "Happy little quote",
-      body:
-        "Talent is a pursued interest. Anything that you're willing to practice, you can do.― Bob Ross "
-    }
   ]);
 
   const addNewForm = form => {
@@ -25,7 +22,7 @@ function App() {
     setForms([...forms, newForm]);
   };
 
-  
+
   return (
     <div className="App">
         <h1>New Forms</h1>

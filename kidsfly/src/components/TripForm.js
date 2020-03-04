@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState} from 'react';
 
 
 const TripForm = props => {
@@ -19,11 +19,11 @@ var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds(
 var dateTime = date+' '+time;
 
 
-const handleChanges = event => {
+const handleChanges = (event, setForm, form) => {
    setForm({...form, [event.target.name]: event.target.value}); 
 }
 
-const submitForm = event => {
+const submitForm = (event, setForm, form, props) => {
     event.preventDefault();
     props.addNewForm(form);
     setForm({
