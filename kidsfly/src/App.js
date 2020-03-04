@@ -1,9 +1,8 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Login from "./components/Login";
 import TripForm from './components/TripForm'
-// import SubForm from './components/SubForm'
 import UserCard from "./components/UserCard"
 import AdminPage from "./components/AdminPage"
 import UserRegistration from './components/UserRegistration';
@@ -28,22 +27,16 @@ function App() {
 
   return (
     <Router>
-    <div className="App">
-        {/* <h1>New Forms</h1> */}
-        {/* <TripForm addNewForm={addNewForm} /> */}
-        {/* <SubForm forms={forms} /> */}
-
-      
-      
-      <Route path="/trip_form" component={TripForm} />
-      <Route exact path ="/" component={WelcomePage} />
-      <Route path="/admin_page" component={AdminPage}/>
-      <Route exact path="/user_registration" component={UserRegistration} />
-      <Route exact path="/admin_page" component={AdminPage}/>
-      <Route exact path="/login" component={Login} />
-      <PrivateRoute exact path="/protected" component={UserCard} />
-      
-    </div>
+      <div className="App">
+        <Switch>
+          <Route exact path="/" component={WelcomePage} />
+          <Route path="/user_registration" component={UserRegistration} />
+          <Route path="/login" component={Login} />
+          <PrivateRoute path="/trip_form" component={TripForm} />
+          <Route path="/admin_page" component={AdminPage} />
+          <PrivateRoute path="/protected" component={UserCard} />
+        </Switch>
+      </div>
     </Router>
   );
 }

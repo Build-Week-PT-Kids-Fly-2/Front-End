@@ -2,38 +2,44 @@ import React from "react";
 import axiosWithAuth from "../utilites/axiosWithAuth";
 import { withRouter } from "react-router-dom";
 
-class Login extends React.Component {
-    state = {
+class Login extends React.Component{
+    constructor(props){
+        super(props)
+    this.state = {
         credentials: {
             username: "",
             password: ""
         }
     };
+}
+    // const handleChange = e => {
+    //     setCredentials({value: e.target.value});
+    //   }
+
     handleChange = e =>{
         this.setState({
-            credentials: {
-                ...this.state.credentials,
+           credentials: { ...this.state.credentials,
                 [e.target.name]: e.target.value
             }
         })
     }
-    
-    login = e => {
+        
+    handleLogin = e => {
         e.preventDefault();
         axiosWithAuth()
         .post("https://kidsfly1.herokuapp.com/api/auth/login", this.state.credentials)
         .then(res => {
-            localStorage.setItem("token", res.data.payload)
-        this.props.history.push('/protected')
+            localStorage.setItem("token", res.data.token)
+            this.props.history.push('/trip_form')
     })
     .catch(err => console.log(err));
     };
     
     render(){
-        return(
+    return(
             <div>
                 <h1>Login Page</h1>
-                <form onSubmit = {this.logn}>
+                <form onSubmit = {this.handleLogin}>
                     <label>Username</label>
                     <input
                     type = "text"
@@ -56,5 +62,6 @@ class Login extends React.Component {
             </div>
         )
     }
-}
+    }
+
 export default withRouter(Login);

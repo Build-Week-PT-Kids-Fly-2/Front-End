@@ -1,6 +1,7 @@
 import React, { useState} from 'react';
 import { withRouter } from "react-router-dom";
-
+import TripFormHeader from './TripFormHeader'
+// import styled from "styled-components"
 
 const TripForm = props => {
     const [form, setForm] = useState({
@@ -13,12 +14,10 @@ const TripForm = props => {
         Needs: ""
     });
 
-
-const handleChanges = (event, setForm, form) => {
+const handleChanges = event => {
    setForm({...form, [event.target.name]: event.target.value}); 
 }
-
-const submitForm = (event, setForm, form, props) => {
+const submitForm = event => {
     event.preventDefault();
     props.addNewForm(form);
     setForm({
@@ -27,15 +26,16 @@ const submitForm = (event, setForm, form, props) => {
         Flight_Number: "",
         Departure_Time: "",
         Carry_On: "",
-        Number_Of_Children: "",
+        Number_of_Children: "",
         Needs: ""
 })
 }
-
 return (
+<div>
+    <TripFormHeader />
+    <h1>New Forms</h1>
     <form className='form' onSubmit={submitForm}>
-
-        <label htmlFor="Airport">Airport Name</label>
+        <label htmlFor="Airport">Airport Name  </label>
             <input
                 type="text"
                 name="Airport"
@@ -44,7 +44,8 @@ return (
                 value={form.Airport}
                 onChange={handleChanges}
             />
-        <label htmlFor="Airline">Airline Name</label>
+            <br></br>
+        <label htmlFor="Airline">Airline Name </label>
             <input
                     type="text"
                     name="Airline"
@@ -53,16 +54,18 @@ return (
                     value={form.Airline}
                     onChange={handleChanges}
             />
-        <label htmlFor="Flight_Number">Flight Number</label>
+            <br></br>
+        <label htmlFor="Flight_Number">Flight Number </label>
                 <input
                     type="text"
                     name="Flight_Number"
                     id="Flight_Number"
-                    placeholder= "Flight Number"
+                    placeholder={`${Date.now()}`}
                     value={form.Flight_Number}
                     onChange={handleChanges}
             />
-        <label htmlFor="Departure_Time">Departure Time</label>
+            <br></br>
+        <label htmlFor="Departure_Time">Departure Time </label>
                 <input
                     type="text"
                     name="Departure_Time"
@@ -71,7 +74,8 @@ return (
                     value={form.Departure_Time}
                     onChange={handleChanges}
             />
-        <label htmlFor="Carry_On">Amount of Carry on Luggage</label>
+            <br></br>
+        <label htmlFor="Carry_On">Amount of Carry on Luggage </label>
                 <input
                     type="text"
                     name="Carry_On"
@@ -80,7 +84,8 @@ return (
                     value={form.Carry_On}
                     onChange={handleChanges}
             />
-        <label htmlFor="Number_of_Children">Number of Children</label>
+            <br></br>
+        <label htmlFor="Number_of_Children">Number of Children </label>
                 <input
                     type="text"
                     name="Number_of_Children"
@@ -89,7 +94,8 @@ return (
                     value={form.Number_of_Children}
                     onChange={handleChanges}
             />
-        <label htmlFor="Needs">Special Needs or Services</label>
+            <br></br>
+        <label htmlFor="Needs">Special Needs or Services </label>
                 <input
                     type="text"
                     name="Needs"
@@ -98,9 +104,10 @@ return (
                     value={form.Needs}
                     onChange={handleChanges}
             />
+            <br></br>
             <button type="submit">Add Trip</button>
    </form>
+   </div>
 )
 }
-
 export default withRouter(TripForm);
