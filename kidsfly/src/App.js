@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Login from "./components/Login";
 import UserCard from "./components/UserCard"
 import AdminPage from "./components/AdminPage"
@@ -12,14 +12,15 @@ function App() {
   return (
     <Router>
     <div className="App">
-      <WelcomePage path="/" component={WelcomePage} />
-      <Route path="/user_registration" component={UserRegistration} />
-      <Route path="/admin_page" component={AdminPage}/>
       <Switch>
-          <PrivateRoute exact path="/protected" component={UserCard} />
-          <Route path="/login" component={Login} />
+      <Route exact path="/" component={WelcomePage} />
+      <Route exact path="/user_registration" component={UserRegistration} />
+      <Route exact path="/admin_page" component={AdminPage}/>
+      <Route exact path="/login" component={Login} />
+      <Route path="/user_card" component={UserCard} />
+      <PrivateRoute exact path="/protected" component={UserCard} />
       </Switch>
-        </div>
+    </div>
     </Router>
   );
 }
