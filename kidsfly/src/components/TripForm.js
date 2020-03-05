@@ -19,7 +19,8 @@ var dateTime = date+' '+time;
 
 const handleChanges = event => {
    setForm({...form, [event.target.name]: event.target.value}); 
-}
+}//handlechanges
+
 const submitForm = event => {
     event.preventDefault();
     props.addNewForm(form);
@@ -32,13 +33,15 @@ const submitForm = event => {
         Number_of_Children: "",
         Needs: ""
 })
-}
+}//submit form
+
+
 return (
 <div>
     <TripFormHeader />
     <h1>New Forms</h1>
     <form className='form' onSubmit={submitForm}>
-        <label htmlFor="Airport">Airport Name  </label>
+      <div>  <label htmlFor="Airport">Airport Name  </label>
             <input
                 type="text"
                 name="Airport"
@@ -46,9 +49,8 @@ return (
                 placeholder="Airport Name"
                 value={form.Airport}
                 onChange={handleChanges}
-            />
-            <br></br>
-        <label htmlFor="Airline">Airline Name </label>
+            /></div>
+        <div><label htmlFor="Airline">Airline Name </label>
             <input
                     type="text"
                     name="Airline"
@@ -56,8 +58,7 @@ return (
                     placeholder="Airline Name"
                     value={form.Airline}
                     onChange={handleChanges}
-            />
-            <br></br>
+            /></div>
         <label htmlFor="Flight_Number">Flight Number </label>
                 <input
                     type="text"
@@ -88,7 +89,7 @@ return (
                     onChange={handleChanges}
             />
             <br></br>
-        <label htmlFor="Number_of_Children">Number of Children </label>
+       <div> <label htmlFor="Number_of_Children">Number of Children </label>
                 <input
                     type="text"
                     name="Number_of_Children"
@@ -96,8 +97,8 @@ return (
                     placeholder="Number of Children"
                     value={form.Number_of_Children}
                     onChange={handleChanges}
-            />
-            <br></br>
+            /></div>
+            
         <label htmlFor="Needs">Special Needs or Services </label>
                 <input
                     type="text"

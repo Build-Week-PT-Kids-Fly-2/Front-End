@@ -6,8 +6,11 @@ import { withRouter } from 'react-router-dom';
 const TripFormHeader = props => {
     return (
       <nav>
-        <h2 onClick={() => props.history.push("/")}>welcome</h2>
-        <h2 onClick={() => props.history.push("/User_Registration")}>registration</h2>
+          <button onClick={() => props.history.push("/")} >Welcome</button>
+          <button onClick={() => props.history.push("/trip_form")} >Trip Form</button>
+          <button onClick={() => props.history.push("/profile")} >Profile</button>
+          <button onClick={() => props.history.push("/login")} >Login</button>
+          <button onClick={() => props.history.push("/user_registration")}>Registration</button>
       </nav>
     )
   }
