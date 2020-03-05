@@ -1,15 +1,36 @@
 import React from "react";
 // import styled from "styled-components";
-import axiosWithAuth from "../utilites/axiosWithAuth";
+import {axiosWithAuth} from "../utilites/axiosWithAuth";
 import UserRegistration from "../components/UserRegistration";
 import User from "../components/User";
 
 
 class UserCard extends React.Component {
+    state = {
+        users: []
+      };
+
+      componentDidMount() {
+        this.getData();
+      }
+    
+      getData = () => {
+        axiosWithAuth()
+          .get("api/users/:id")
+          .then(res => {
+            console.log(res.data);
+            this.setState({
+              users: res.data
+            });
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      };
 
     addUser = user => {
         axiosWithAuth()
-          .post("api/user", user)
+          .get("api/users", user)
     
           .then(res => {
             
@@ -24,9 +45,9 @@ class UserCard extends React.Component {
  return (
      <div>
          <UserRegistration addUser={this.addUser} />
-        {this.state.user.map(users => {
+        {this.state.users.map(user => {
           
-          return <User key={users.id} data={users} />;
+          return <User key={user.id} data={user} />;
         })}
      </div>
  )

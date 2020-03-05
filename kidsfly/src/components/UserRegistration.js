@@ -1,6 +1,6 @@
 import React from "react";
 import {axiosWithAuth} from "../utilites/axiosWithAuth";
-import { withRouter } from "react-router-dom";
+// import { withRouter } from "react-router-dom";
 
 
 class UserRegistration extends React.Component {
@@ -29,14 +29,14 @@ class UserRegistration extends React.Component {
         })
     };   
       
-    addFriend = e => {
+    handleSubmit = e => {
         e.preventDefault();
         axiosWithAuth()
-        .post('api/users/:id ', this.state.user)
+        .post('/api/:id/', this.state.user)
         .then(res => {
             console.log('success', res);
             localStorage.setItem('user', res.data.payload);
-            this.props.history.push('/user_card')
+            this.props.history.push('/login')
         })
         .catch(err => console.log('error', err))
     };
@@ -134,4 +134,4 @@ class UserRegistration extends React.Component {
  }   
 
 
-export default withRouter(UserRegistration);
+export default UserRegistration;

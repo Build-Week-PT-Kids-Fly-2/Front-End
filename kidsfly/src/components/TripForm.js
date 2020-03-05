@@ -2,6 +2,7 @@ import React, { useState} from 'react';
 import { withRouter } from "react-router-dom";
 import TripFormHeader from './TripFormHeader'
 
+
 const TripForm = props => {
     const [form, setForm] = useState({
         Airport: "",
@@ -12,10 +13,7 @@ const TripForm = props => {
         Number_of_Children: "",
         Needs: ""
     });
-var today = new Date();
-var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-var dateTime = date+' '+time;
+
 
 const handleChanges = event => {
    setForm({...form, [event.target.name]: event.target.value}); 
@@ -33,8 +31,12 @@ const submitForm = event => {
         Number_of_Children: "",
         Needs: ""
 })
+<<<<<<< HEAD
 }//submit form
 
+=======
+}
+>>>>>>> 8c7c9c28b7ea3fde6b69185302b50ef2c64d1430
 
 return (
 <div>
@@ -64,7 +66,7 @@ return (
                     type="text"
                     name="Flight_Number"
                     id="Flight_Number"
-                    placeholder={`${Date.now()}`}
+                    placeholder= "Flight Number"
                     value={form.Flight_Number}
                     onChange={handleChanges}
             />
@@ -74,7 +76,7 @@ return (
                     type="text"
                     name="Departure_Time"
                     id="Departure_Time"
-                    placeholder={dateTime}
+                    placeholder="Departure Time"
                     value={form.Departure_Time}
                     onChange={handleChanges}
             />
