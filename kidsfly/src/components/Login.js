@@ -1,7 +1,7 @@
 import React from "react";
 import axiosWithAuth from "../utilites/axiosWithAuth";
 import { withRouter } from "react-router-dom";
-import Yup from "yup";
+
 
 class Login extends React.Component{
     constructor(props){
@@ -36,11 +36,6 @@ class Login extends React.Component{
     .catch(err => console.log(err));
     };
 
-    validationSchema: Yup.object().shape({
-        username: Yup.string().required("username is mandatory"),
-        password: Yup.string().required("password is mandatory")
-      }),
-    
     render(){
     return(
             <div>
