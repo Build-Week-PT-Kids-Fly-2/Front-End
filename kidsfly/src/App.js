@@ -15,6 +15,7 @@ import AdminPage from "./components/AdminPage"
 import UserRegistration from './components/UserRegistration';
 import PrivateRoute from "./components/PrivateRoute"
 import WelcomePage from "./components/WelcomePage"
+import ProfilePage from "./components/Profile"
 
 function App() {
 
@@ -57,8 +58,13 @@ function App() {
       <Route exact path="/admin_page" component={AdminPage}/>
       <PrivateRoute exact path="/protected" component={UserCard} />
       <Route exact path="/login" component={Login} />
+<<<<<<< HEAD
+      <Route exact path="/profile" component={ProfilePage} />
+
+=======
 
       
+>>>>>>> 8c7c9c28b7ea3fde6b69185302b50ef2c64d1430
     </div>
     </Router>
   );

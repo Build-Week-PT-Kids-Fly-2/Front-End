@@ -33,6 +33,7 @@ class Login extends React.Component {
         return(
             <div>
                 <h1>Login Page</h1>
+                
                 <form onSubmit = {this.logn}>
                     <label>Username</label>
                     <input
@@ -49,6 +50,7 @@ class Login extends React.Component {
                     value = {this.state.credentials.password}
                     onChange = {this.handleChange}
                     />
+                    
                     <button>Login</button>
                 
                 </form>
