@@ -1,7 +1,7 @@
 import React, { useState} from 'react';
 import { withRouter } from "react-router-dom";
 import TripFormHeader from './TripFormHeader'
-
+// import { withFormik, Form, Field } from "formik";
 
 const TripForm = props => {
     const [form, setForm] = useState({
@@ -31,12 +31,9 @@ const submitForm = event => {
         Number_of_Children: "",
         Needs: ""
 })
-<<<<<<< HEAD
 }//submit form
 
-=======
-}
->>>>>>> 8c7c9c28b7ea3fde6b69185302b50ef2c64d1430
+
 
 return (
 <div>
