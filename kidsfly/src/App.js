@@ -11,6 +11,8 @@ import AdminPage from "./components/AdminPage"
 import UserRegistration from './components/UserRegistration';
 import PrivateRoute from "./components/PrivateRoute"
 import WelcomePage from "./components/WelcomePage"
+import ProfilePage from "./components/Profile"
+import TripProfile from './components/TripProfile';
 
 function App() {
 
@@ -31,15 +33,21 @@ function App() {
   return (
     <Router>
     <div className="App">
+    
     <Switch>
       <Route exact path='/trip_form' component={TripForm} />
+      <Route path="/trip_profile" component={TripProfile} />
       <Route exact path="/" component={WelcomePage} />
       <Route exact path="/user_registration" component={UserRegistration} />
       <Route exact path="/admin_page" component={AdminPage}/>
       <PrivateRoute exact path="/protected" component={UserCard} />
       <Route exact path="/login" component={Login} />
     </Switch>
+
+      <Route exact path="/profile" component={ProfilePage} />
+
       
+
     </div>
     </Router>
   );
