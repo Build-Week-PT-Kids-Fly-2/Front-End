@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
-
+import Footer from "./components/Footer"
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Login from "./components/Login";
 import TripForm from './components/TripForm'
@@ -33,7 +33,7 @@ function App() {
   return (
     <Router>
     <div className="App">
-    
+    <Footer />
     <Switch>
       <Route exact path='/trip_form' component={TripForm} />
       <Route path="/trip_profile" component={TripProfile} />
