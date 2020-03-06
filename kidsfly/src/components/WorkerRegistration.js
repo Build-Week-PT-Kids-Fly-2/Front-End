@@ -3,17 +3,17 @@ import axios from "axios";
 import { withRouter } from "react-router-dom";
 
 
-const UserRegistration =(props) => {
+const WorkerRegistration =(props) => {
     
-    const [user, setUser] = useState({
+    const [worker, setWorker] = useState({
       
         username: "",
         password: ""
        })
       
     const handleChange = e => {
-        setUser(
-            {...user,
+        setWorker(
+            {...worker,
                 [e.target.name]: e.target.value
             })
         }
@@ -21,18 +21,18 @@ const UserRegistration =(props) => {
     const handleSubmit = e => {
         e.preventDefault();
         axios
-        .post('https://kidsfly1.herokuapp.com/api/auth/register', user)
+        .post('https://kidsfly1.herokuapp.com/api/workers/register', worker)
         .then(res => {
             console.log('success', res);
-            localStorage.setItem('user', res.data.payload);
-            props.history.push('/login')
+            localStorage.setItem('worker', res.data.payload);
+            props.history.push('/worker_login')
         })
         .catch(err => console.log('error', err))
     };
            
        return(
          <div>
-             <h1>Traveler Registration</h1>
+             <h1>Worker Registration</h1>
              <form onSubmit={handleSubmit}>
                       
                 <div className='form-group'>
@@ -41,7 +41,7 @@ const UserRegistration =(props) => {
                  type = "email"
                  name = "username"
                  placeholder = "email"
-                 value = {user.username}
+                 value = {worker.username}
                  onChange = {handleChange}
                  />
                 </div>
@@ -52,7 +52,7 @@ const UserRegistration =(props) => {
                  type = "text"
                  name = "password"
                  placeholder = "password"
-                 value = {user.password}
+                 value = {worker.password}
                  onChange = {handleChange}
                  />
                  </div>
@@ -64,4 +64,4 @@ const UserRegistration =(props) => {
   
 
 
-export default withRouter(UserRegistration);
+export default withRouter(WorkerRegistration);

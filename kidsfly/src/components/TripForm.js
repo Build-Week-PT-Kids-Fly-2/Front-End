@@ -1,6 +1,5 @@
 import React, { useState} from 'react';
 import { withRouter } from "react-router-dom";
-import TripFormHeader from './TripFormHeader'
 import axios from "axios";
 
 const TripForm = props => {
@@ -46,7 +45,7 @@ const handleSubmit = e => {
 
 return (
 <div>
-    <TripFormHeader />
+    
     <h1>New Forms</h1>
     <form className='form' onSubmit={handleSubmit}>
       <div>  <label htmlFor="Airport">Airport Name  </label>
