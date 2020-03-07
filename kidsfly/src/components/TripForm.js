@@ -1,7 +1,6 @@
 import React, { useState} from 'react';
 import { withRouter } from "react-router-dom";
-import TripFormHeader from './TripFormHeader'
-
+import axios from "axios";
 
 const TripForm = props => {
     const [form, setForm] = useState({
@@ -14,35 +13,41 @@ const TripForm = props => {
         Needs: ""
     });
 
-
 const handleChanges = event => {
    setForm({...form, [event.target.name]: event.target.value}); 
 }//handlechanges
 
-const submitForm = event => {
-    event.preventDefault();
-    props.addNewForm(form);
-    setForm({
-        Airport: "",
-        Airline: "",
-        Flight_Number: "",
-        Departure_Time: "",
-        Carry_On: "",
-        Number_of_Children: "",
-        Needs: ""
-})
-<<<<<<< HEAD
-}//submit form
+// const submitForm = event => {
+//     event.preventDefault();
+//     props.addNewForm(form);
+//     setForm({
+//         Airport: "",
+//         Airline: "",
+//         Flight_Number: "",
+//         Departure_Time: "",
+//         Carry_On: "",
+//         Number_of_Children: "",
+//         Needs: ""
+// })
+// }
+const handleSubmit = e => {
+    e.preventDefault();
+    axios
+    .post('https://kidsfly1.herokuapp.com/api/:id/new_trip', form)
+    .then(res => {
+        console.log('success', res);
+        localStorage.setItem('form', res.data.payload);
+        props.history.push('/trip_profile')
+    })
+    .catch(err => console.log('error', err))
+};
 
-=======
-}
->>>>>>> 8c7c9c28b7ea3fde6b69185302b50ef2c64d1430
 
 return (
 <div>
-    <TripFormHeader />
+    
     <h1>New Forms</h1>
-    <form className='form' onSubmit={submitForm}>
+    <form className='form' onSubmit={handleSubmit}>
       <div>  <label htmlFor="Airport">Airport Name  </label>
             <input
                 type="text"

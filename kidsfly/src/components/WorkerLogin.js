@@ -1,26 +1,21 @@
 import React from "react";
-import axiosWithAuth from "../utilites/axiosWithAuth";
-import { withRouter } from "react-router-dom";
+import axiosWithAuth from '../utilites/axiosWithAuth';
+import {withRouter} from "react-router-dom";
 
-
-
-class Login extends React.Component{
+class WorkerLogin extends React.Component{
     constructor(props){
         super(props)
     this.state = {
-        credentials: {
+        worker: {
             username: "",
             password: ""
         }
     };
 }
-    // const handleChange = e => {
-    //     setCredentials({value: e.target.value});
-    //   }
-
+   
     handleChange = e =>{
         this.setState({
-           credentials: { ...this.state.credentials,
+           worker: { ...this.state.worker,
                 [e.target.name]: e.target.value
             }
         })
@@ -29,10 +24,10 @@ class Login extends React.Component{
     handleLogin = e => {
         e.preventDefault();
         axiosWithAuth()
-        .post("https://kidsfly1.herokuapp.com/api/auth/login", this.state.credentials)
+        .post("https://kidsfly1.herokuapp.com/api/workers/login", this.state.worker)
         .then(res => {
             localStorage.setItem("token", res.data.token)
-            this.props.history.push('/trip_form')
+            this.props.history.push('/admin_page')
     })
     .catch(err => console.log(err));
     };
@@ -41,13 +36,13 @@ class Login extends React.Component{
     return(
             <div>
                
-                <h1>Login Page</h1>
+                <h1>Worker Login Page</h1>
                 <form onSubmit = {this.handleLogin}>
                     <label>Username</label>
                     <input
                     type = "text"
                     name = "username"
-                    value = {this.state.credentials.username}
+                    value = {this.state.worker.username}
                     onChange = {this.handleChange}
                     />
 
@@ -55,7 +50,7 @@ class Login extends React.Component{
                     <input
                     type = "text"
                     name = "password"
-                    value = {this.state.credentials.password}
+                    value = {this.state.worker.password}
                     onChange = {this.handleChange}
                     />
                     
@@ -68,4 +63,4 @@ class Login extends React.Component{
     }
     }
 
-export default withRouter(Login);
+export default withRouter(WorkerLogin);

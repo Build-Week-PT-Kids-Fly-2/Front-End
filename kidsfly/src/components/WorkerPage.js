@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import styled from "styled-components";
 
 
-const Welcome = styled.div`
+const Worker = styled.div`
 .title{
   font-size: 4rem;
 }
@@ -32,19 +32,17 @@ const Welcome = styled.div`
 `
 
 
-
-const WelcomePage = props => {
+const WorkerPage = props => {
     return (
-      <div>
+      <Worker>
         
-        <Welcome>
-          <h2 className="title">Welcome to KidsFly</h2>
-          <button className= "btn1" onClick={() => props.history.push("/login")} >Login</button>
-          <button className="btn2" onClick={() => props.history.push("/user_registration")}>Registration</button>
-        </Welcome>
-      </div>
+        <div>
+          <h2 className="title">Worker Page</h2>
+          <button className= "btn1" onClick={() => props.history.push("/worker_login")} >Login</button>
+          <button className="btn2" onClick={() => props.history.push("/worker_registration")}>Registration</button>
+        </div>
+      </Worker>
       
     );
   };
-  
-  export default withRouter(WelcomePage);
+  export default withRouter(WorkerPage);
