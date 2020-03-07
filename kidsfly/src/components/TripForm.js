@@ -33,7 +33,7 @@ const handleChanges = event => {
 const handleSubmit = e => {
     e.preventDefault();
     axios
-    .post('https://kidsfly1.herokuapp.com/api/:id/', form)
+    .post('https://kidsfly1.herokuapp.com/api/:id', form)
     .then(res => {
         console.log('success', res);
         localStorage.setItem('form', res.data.payload);

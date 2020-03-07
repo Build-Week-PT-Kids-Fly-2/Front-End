@@ -6,7 +6,8 @@ import { withRouter } from "react-router-dom";
 const WorkerRegistration =(props) => {
     
     const [worker, setWorker] = useState({
-      
+
+        name: "",
         username: "",
         password: ""
        })
@@ -34,6 +35,17 @@ const WorkerRegistration =(props) => {
          <div>
              <h1>Worker Registration</h1>
              <form onSubmit={handleSubmit}>
+
+             <div className='form-group'>
+                <label>Name</label>
+                 <input 
+                 type = "text"
+                 name = "name"
+                 placeholder = "name"
+                 value = {worker.name}
+                 onChange = {handleChange}
+                 />
+                 </div>
                       
                 <div className='form-group'>
                 <label>Username</label>
@@ -56,6 +68,7 @@ const WorkerRegistration =(props) => {
                  onChange = {handleChange}
                  />
                  </div>
+
                  <button type='submit' className='btn'>Submit</button>
              </form>
          </div>

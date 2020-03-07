@@ -27,7 +27,7 @@ class AdminLogin extends React.Component{
   handleLogin = e => {
       e.preventDefault();
       axios
-      .post("https://kidsfly1.herokuapp.com/api/admin/login", this.state.admin)
+      .post("https://kidsfly1.herokuapp.com/api/admins/login", this.state.admin)
       .then(res => {
           localStorage.setItem("token", res.data.token)
           this.props.history.push('/admin_page')
