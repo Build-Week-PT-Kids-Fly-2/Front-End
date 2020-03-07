@@ -4,18 +4,21 @@ import WorkerInfo from "../components/WorkerInfo";
 
 
 class AdminPage extends React.Component {
-    state ={
+  constructor(props){
+    super(props);
+    this.state ={
      trip: [],
-     worker: []
+     worker: [],
+     isLoaded: false
     };
-
-    getWorker = () => {
+  }
+    componentDidMount(){
         axios
-          .get('api/workers/:id')
+          .get('api/:id/trips')
           .then(response => {
-            console.log(response.data);
-            this.setState({
-              worker: response.data.data
+             this.setState({
+               isLoaded: true,
+              trip: response.data.data
             })
           })
           .catch(error => {
@@ -23,18 +26,18 @@ class AdminPage extends React.Component {
           });
       };
 
-    addTrip = () => {
-        axios
-          .get("/api/:id/trips ")
+    // addTrip = () => {
+    //     axios
+    //       .get("/api/:id/trips ")
     
-          .then(res => {
+    //       .then(res => {
             
-            console.log(res.data);
-          })
-          .catch(error => {
-            console.log(error);
-          });
-      };
+    //         console.log(res.data);
+    //       })
+    //       .catch(error => {
+    //         console.log(error);
+    //       });
+    //   };
 
     deleteTrip = e => {
         e.preventDefault();
@@ -48,22 +51,25 @@ class AdminPage extends React.Component {
           });
       }
       render(){
+        const {isLoaded, trip} = this.state;
+        if(!isLoaded){
+          return <div>Loading...</div>;
+        }
     return(
         <div>
          
             <h1>Admin Page</h1>
-            {this.state.worker.map(workers => {
-          
-          return <WorkerInfo key={workers.id} data={workers} />;
-        })}
-        <div>
-          <p>NAME:{this.props.name}</p>
-          <p>USERNAME:{this.props.username}</p>
-          <p>PASSWORD:{this.props.password}</p>
-        </div>
-           
-            <button onClick={this.getWorker}>Get Worker</button>
-            <button onClick={this.deleteWorker}>Delete</button>
+                   
+         <ul>
+          {trip.map(trips =>(
+          <li key = {trips.id}>
+          NAME:{this.props.name}
+          <button onClick={this.getWorker}>Get Worker</button>
+          <button onClick={this.deleteWorker}>Delete</button>
+          </li>
+          ))} 
+          </ul>
+            
         </div>
     )
   }
