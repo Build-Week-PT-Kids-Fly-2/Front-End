@@ -1,7 +1,6 @@
 import React, { useState} from 'react';
 import { withRouter } from "react-router-dom";
-import TripFormHeader from './TripFormHeader'
-// import { withFormik, Form, Field } from "formik";
+import axios from "axios";
 
 const TripForm = props => {
     const [form, setForm] = useState({
@@ -14,7 +13,6 @@ const TripForm = props => {
         Needs: ""
     });
 
-
 const handleChanges = event => {
    setForm({...form, [event.target.name]: event.target.value}); 
 }//handlechanges
@@ -22,6 +20,14 @@ const handleChanges = event => {
 const submitForm = event => {
     event.preventDefault();
     props.addNewForm(form);
+    axios
+    .post('https://kidsfly1.herokuapp.com/api/:id/new_trip', form)
+    .then(res => {
+        console.log('success', res);
+        localStorage.setItem('form', res.data.payload);
+        props.history.push('/trip_profile')
+    })
+    .catch(err => console.log('error', err))
     setForm({
         Airport: "",
         Airline: "",
@@ -31,13 +37,23 @@ const submitForm = event => {
         Number_of_Children: "",
         Needs: ""
 })
-}//submit form
-
+}
+// const handleSubmit = e => {
+//     e.preventDefault();
+//     axios
+//     .post('https://kidsfly1.herokuapp.com/api/:id/new_trip', form)
+//     .then(res => {
+//         console.log('success', res);
+//         localStorage.setItem('form', res.data.payload);
+//         props.history.push('/trip_profile')
+//     })
+//     .catch(err => console.log('error', err))
+// };
 
 
 return (
 <div>
-    <TripFormHeader />
+    
     <h1>New Forms</h1>
     <form className='form' onSubmit={submitForm}>
       <div>  <label htmlFor="Airport">Airport Name  </label>

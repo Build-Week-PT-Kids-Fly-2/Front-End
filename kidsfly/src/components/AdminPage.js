@@ -1,63 +1,77 @@
 import React from "react";
-import axiosWithAuth from "../utilites/axiosWithAuth"
+import axios from "axios";
+import WorkerInfo from "../components/WorkerInfo";
 
-class AdminPage extends React.Component{
-    constructor(props) {
+
+class AdminPage extends React.Component {
+  constructor(props){
     super(props);
-    this.state = {
-        admin: {
-    username: "",
-    password: ""
-    }
-   }
-}
-handleChange = e => {
-    this.setState({
-        admin: {
-            ...this.state.admin,
-            [e.target.name]: e.target.value
+    this.state ={
+     trip: [],
+     worker: [],
+     isLoaded: false
+    };
+  }
+    componentDidMount(){
+        axios
+          .get('api/:id/trips')
+          .then(response => {
+             this.setState({
+               isLoaded: true,
+              trip: response.data.data
+            })
+          })
+          .catch(error => {
+            console.log("ERROR:", error)
+          });
+      };
+
+    // addTrip = () => {
+    //     axios
+    //       .get("/api/:id/trips ")
+    
+    //       .then(res => {
+            
+    //         console.log(res.data);
+    //       })
+    //       .catch(error => {
+    //         console.log(error);
+    //       });
+    //   };
+
+    deleteTrip = e => {
+        e.preventDefault();
+        axios
+          .delete("/api/trips/:id ")
+          .then(() => {
+            this.addTrip();
+          })
+          .catch(err => {
+            console.log("Error deleting: ", err);
+          });
+      }
+      render(){
+        const {isLoaded, trip} = this.state;
+        if(!isLoaded){
+          return <div>Loading...</div>;
         }
-    })
-};   
-  
-handleSubmit = e => {
-    e.preventDafault();
-      axiosWithAuth()
-      .post("https://kidsfly1.herokuapp.com//api/admin/login", this.state.user)
-      .then(res => {
-        localStorage.setItem("token", res.data.payload);
-        this.props.history.push("/login");
-      })
-      .catch(err => {
-        console.log("error registering: ", err);
-      });
-    }  
-    render() {          
-        return(
-          <div>
-              <h1>Admin Page</h1>
-              <form onSubmit={this.handleSubmit}>
-                  <label>Username</label>
-                  <input 
-                  type = "text"
-                  name = "username"
-                  placeholder = "username"
-                  value = {this.state.username}
-                  onChange = {this.handleChange}
-                  />
- 
-                  <label>Password</label>
-                  <input
-                  type = "text"
-                  name ="password"
-                  placeholder = "password"
-                  value = {this.state.password}
-                  onChange = {this.handleChange}
-                  />
-                </form>
-                </div>
-        )
-    }
- 
+    return(
+        <div>
+         
+            <h1>Admin Page</h1>
+                   
+         <ul>
+          {trip.map(trips =>(
+          <li key = {trips.id}>
+          NAME:{this.props.name}
+          <button onClick={this.getWorker}>Get Worker</button>
+          <button onClick={this.deleteWorker}>Delete</button>
+          </li>
+          ))} 
+          </ul>
+            
+        </div>
+    )
+  }
 }
 export default AdminPage;
